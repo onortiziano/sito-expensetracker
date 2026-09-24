@@ -275,3 +275,9 @@ h2 { margin-top: 20px; color: #20334e; font-size: clamp(42px, 5vw, 68px); line-h
 @keyframes lightbox-caption-from-right { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes lightbox-caption-from-left { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .lightbox-caption.lightbox-caption-from-right, .lightbox-caption.lightbox-caption-from-left { animation: none; } }
+
+.lightbox-title.lightbox-title-from-right { animation: lightbox-title-from-right 260ms 35ms cubic-bezier(.23,1,.32,1) both; }
+.lightbox-title.lightbox-title-from-left { animation: lightbox-title-from-left 260ms 35ms cubic-bezier(.23,1,.32,1) both; }
+@keyframes lightbox-title-from-right { from { opacity: 0; transform: translateX(13px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes lightbox-title-from-left { from { opacity: 0; transform: translateX(-13px); } to { opacity: 1; transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .lightbox-title.lightbox-title-from-right, .lightbox-title.lightbox-title-from-left { animation: none; } }
