@@ -18,6 +18,44 @@ const categories = [
   { label: "Mobilità", value: "€ 156", color: "#a9bad2", width: "33%" },
 ];
 
+const appScreens = [
+  {
+    src: "/manus-storage/home-transactions_ddc33622.jpg",
+    alt: "Schermata Home di ExpenseTracker con elenco delle transazioni",
+    title: "Tutto in un colpo d’occhio",
+    text: "La home mostra saldo, entrate e uscite recenti senza nascondere i dettagli.",
+    className: "screen-tall screen-featured",
+  },
+  {
+    src: "/manus-storage/budget-analytics_dfd70800.jpg",
+    alt: "Schermata Analisi Budget di ExpenseTracker",
+    title: "Budget vs spese effettive",
+    text: "Un’analisi visuale per capire quanto hai pianificato e quanto hai davvero speso.",
+    className: "screen-tall",
+  },
+  {
+    src: "/manus-storage/recurring-transactions_3643b681.jpg",
+    alt: "Schermata delle transazioni ricorrenti di ExpenseTracker",
+    title: "Ricorrenze senza pensieri",
+    text: "Gestisci scadenze, frequenze e promemoria direttamente dall’app.",
+    className: "screen-tall",
+  },
+  {
+    src: "/manus-storage/transaction-detail_27e6e6b3.jpg",
+    alt: "Dettaglio di una transazione in ExpenseTracker",
+    title: "Dettagli quando servono",
+    text: "Categorie, tag, note e date rendono ogni movimento facile da ritrovare.",
+    className: "screen-tall",
+  },
+  {
+    src: "/manus-storage/import-data_bc5ec559.jpg",
+    alt: "Schermata Importa Transazioni di ExpenseTracker",
+    title: "Importazione manuale",
+    text: "Porta i tuoi dati dentro ExpenseTracker con un flusso chiaro e locale.",
+    className: "screen-tall",
+  },
+];
+
 const principles = [
   {
     number: "01",
@@ -126,6 +164,26 @@ export default function Home() {
               <div className="visual-label">01 / Insight settimanale</div>
               <div className="insight-card"><div className="insight-icon"><BarChart3 size={20} /></div><div><span className="insight-kicker">Una visione più completa</span><h3>Budget, spese e<br />categorie in un colpo d’occhio.</h3><p>Analytics “budget vs actual”, senza rumore.</p></div><div className="insight-chart"><i /><i /><i /><i /><i /><i /><i /></div></div>
               <div className="visual-footer"><span><ShieldCheck size={15} /> Privacy first</span><span>Dettagli, non distrazioni</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="screens-section" id="schermate">
+          <div className="container">
+            <div className="screens-heading">
+              <div>
+                <div className="eyebrow"><span className="eyebrow-dot navy" /> L’app in azione</div>
+                <h2>Progettata per<br /><em>essere usata.</em></h2>
+              </div>
+              <p>Schermate reali dell’app Android: un’interfaccia scura, compatta e concreta, costruita per accompagnare le decisioni quotidiane senza distrazioni.</p>
+            </div>
+            <div className="screens-grid">
+              {appScreens.map((screen) => (
+                <article className={`screen-card ${screen.className}`} key={screen.src}>
+                  <div className="screen-image-wrap"><img src={screen.src} alt={screen.alt} loading="lazy" /></div>
+                  <div className="screen-caption"><h3>{screen.title}</h3><p>{screen.text}</p></div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
