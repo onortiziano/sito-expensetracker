@@ -269,3 +269,9 @@ h2 { margin-top: 20px; color: #20334e; font-size: clamp(42px, 5vw, 68px); line-h
 @keyframes lightbox-image-from-right { from { opacity: .35; transform: translateX(28px); } to { opacity: 1; transform: translateX(0); } }
 @keyframes lightbox-image-from-left { from { opacity: .35; transform: translateX(-28px); } to { opacity: 1; transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .lightbox-screen-image.lightbox-enter-from-right, .lightbox-screen-image.lightbox-enter-from-left { animation: none; } }
+
+.lightbox-caption.lightbox-caption-from-right { animation: lightbox-caption-from-right 260ms 55ms cubic-bezier(.23,1,.32,1) both; }
+.lightbox-caption.lightbox-caption-from-left { animation: lightbox-caption-from-left 260ms 55ms cubic-bezier(.23,1,.32,1) both; }
+@keyframes lightbox-caption-from-right { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes lightbox-caption-from-left { from { opacity: 0; transform: translateX(-16px); } to { opacity: 1; transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) { .lightbox-caption.lightbox-caption-from-right, .lightbox-caption.lightbox-caption-from-left { animation: none; } }
