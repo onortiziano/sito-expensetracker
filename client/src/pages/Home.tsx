@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type TouchEvent } from "react";
 import {
   ArrowDownRight,
   ArrowLeft,
@@ -79,12 +79,26 @@ const principles = [
 
 export default function Home() {
   const [selectedScreen, setSelectedScreen] = useState<(typeof appScreens)[number] | null>(null);
+  const touchStartX = useRef<number | null>(null);
   const selectedIndex = selectedScreen ? appScreens.findIndex((screen) => screen.src === selectedScreen.src) : -1;
 
   const moveLightbox = (direction: -1 | 1) => {
     if (selectedIndex < 0) return;
     const nextIndex = (selectedIndex + direction + appScreens.length) % appScreens.length;
     setSelectedScreen(appScreens[nextIndex]);
+  };
+
+  const handleLightboxTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    if ((event.target as HTMLElement).closest("button")) return;
+    touchStartX.current = event.changedTouches[0]?.clientX ?? null;
+  };
+
+  const handleLightboxTouchEnd = (event: TouchEvent<HTMLDivElement>) => {
+    if ((event.target as HTMLElement).closest("button") || touchStartX.current === null) return;
+    const endX = event.changedTouches[0]?.clientX ?? touchStartX.current;
+    const deltaX = endX - touchStartX.current;
+    if (Math.abs(deltaX) >= 48) moveLightbox(deltaX < 0 ? 1 : -1);
+    touchStartX.current = null;
   };
 
   useEffect(() => {
@@ -219,7 +233,7 @@ export default function Home() {
           <div className="lightbox" role="dialog" aria-modal="true" aria-label={selectedScreen.title} onClick={() => setSelectedScreen(null)}>
             <div className="lightbox-panel" onClick={(event) => event.stopPropagation()}>
               <div className="lightbox-toolbar"><div><span className="lightbox-kicker">ExpenseTracker / schermata app</span><h3>{selectedScreen.title}</h3></div><button className="lightbox-close" type="button" onClick={() => setSelectedScreen(null)} aria-label="Chiudi immagine ingrandita">×</button></div>
-              <div className="lightbox-image-wrap"><button className="lightbox-nav lightbox-nav-prev" type="button" onClick={() => moveLightbox(-1)} aria-label="Schermata precedente"><ArrowLeft size={19} /></button><img src={selectedScreen.src} alt={selectedScreen.alt} /><button className="lightbox-nav lightbox-nav-next" type="button" onClick={() => moveLightbox(1)} aria-label="Schermata successiva"><ArrowRight size={19} /></button></div>
+              <div className="lightbox-image-wrap" onTouchStart={handleLightboxTouchStart} onTouchEnd={handleLightboxTouchEnd}><button className="lightbox-nav lightbox-nav-prev" type="button" onClick={() => moveLightbox(-1)} aria-label="Schermata precedente"><ArrowLeft size={19} /></button><img src={selectedScreen.src} alt={selectedScreen.alt} /><button className="lightbox-nav lightbox-nav-next" type="button" onClick={() => moveLightbox(1)} aria-label="Schermata successiva"><ArrowRight size={19} /></button></div>
               <div className="lightbox-bottomline"><p className="lightbox-caption">{selectedScreen.text}</p><span className="lightbox-counter">{String(selectedIndex + 1).padStart(2, "0")} / {String(appScreens.length).padStart(2, "0")}</span></div>
             </div>
           </div>
