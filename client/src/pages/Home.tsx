@@ -79,12 +79,19 @@ const principles = [
 
 export default function Home() {
   const [selectedScreen, setSelectedScreen] = useState<(typeof appScreens)[number] | null>(null);
+  const [lightboxDirection, setLightboxDirection] = useState<-1 | 1 | null>(null);
   const touchStartX = useRef<number | null>(null);
   const selectedIndex = selectedScreen ? appScreens.findIndex((screen) => screen.src === selectedScreen.src) : -1;
+
+  const openLightbox = (screen: (typeof appScreens)[number]) => {
+    setLightboxDirection(null);
+    setSelectedScreen(screen);
+  };
 
   const moveLightbox = (direction: -1 | 1) => {
     if (selectedIndex < 0) return;
     const nextIndex = (selectedIndex + direction + appScreens.length) % appScreens.length;
+    setLightboxDirection(direction);
     setSelectedScreen(appScreens[nextIndex]);
   };
 
@@ -221,7 +228,7 @@ export default function Home() {
             <div className="screens-grid">
               {appScreens.map((screen) => (
                 <article className={`screen-card ${screen.className}`} key={screen.src}>
-                  <button className="screen-image-wrap screen-image-button" type="button" onClick={() => setSelectedScreen(screen)} aria-label={`Ingrandisci: ${screen.title}`}><img src={screen.src} alt={screen.alt} loading="lazy" /><span className="screen-zoom-hint">Clicca per ingrandire</span></button>
+                  <button className="screen-image-wrap screen-image-button" type="button" onClick={() => openLightbox(screen)} aria-label={`Ingrandisci: ${screen.title}`}><img src={screen.src} alt={screen.alt} loading="lazy" /><span className="screen-zoom-hint">Clicca per ingrandire</span></button>
                   <div className="screen-caption"><h3>{screen.title}</h3><p>{screen.text}</p></div>
                 </article>
               ))}
@@ -233,7 +240,7 @@ export default function Home() {
           <div className="lightbox" role="dialog" aria-modal="true" aria-label={selectedScreen.title} onClick={() => setSelectedScreen(null)}>
             <div className="lightbox-panel" onClick={(event) => event.stopPropagation()}>
               <div className="lightbox-toolbar"><div><span className="lightbox-kicker">ExpenseTracker / schermata app</span><h3>{selectedScreen.title}</h3></div><button className="lightbox-close" type="button" onClick={() => setSelectedScreen(null)} aria-label="Chiudi immagine ingrandita">×</button></div>
-              <div className="lightbox-image-wrap" onTouchStart={handleLightboxTouchStart} onTouchEnd={handleLightboxTouchEnd}><button className="lightbox-nav lightbox-nav-prev" type="button" onClick={() => moveLightbox(-1)} aria-label="Schermata precedente"><ArrowLeft size={19} /></button><img src={selectedScreen.src} alt={selectedScreen.alt} /><button className="lightbox-nav lightbox-nav-next" type="button" onClick={() => moveLightbox(1)} aria-label="Schermata successiva"><ArrowRight size={19} /></button></div>
+              <div className="lightbox-image-wrap" onTouchStart={handleLightboxTouchStart} onTouchEnd={handleLightboxTouchEnd}><button className="lightbox-nav lightbox-nav-prev" type="button" onClick={() => moveLightbox(-1)} aria-label="Schermata precedente"><ArrowLeft size={19} /></button><img key={selectedScreen.src} className={`lightbox-screen-image ${lightboxDirection === 1 ? "lightbox-enter-from-right" : lightboxDirection === -1 ? "lightbox-enter-from-left" : ""}`} src={selectedScreen.src} alt={selectedScreen.alt} /><button className="lightbox-nav lightbox-nav-next" type="button" onClick={() => moveLightbox(1)} aria-label="Schermata successiva"><ArrowRight size={19} /></button></div>
               <div className="lightbox-bottomline"><p className="lightbox-caption">{selectedScreen.text}</p><span className="lightbox-counter">{String(selectedIndex + 1).padStart(2, "0")} / {String(appScreens.length).padStart(2, "0")}</span></div>
             </div>
           </div>
