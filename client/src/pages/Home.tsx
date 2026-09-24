@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -75,6 +76,21 @@ const principles = [
 ];
 
 export default function Home() {
+  const [selectedScreen, setSelectedScreen] = useState<(typeof appScreens)[number] | null>(null);
+
+  useEffect(() => {
+    if (!selectedScreen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedScreen(null);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [selectedScreen]);
+
   return (
     <div className="site-shell">
       <header className="site-header">
@@ -180,13 +196,23 @@ export default function Home() {
             <div className="screens-grid">
               {appScreens.map((screen) => (
                 <article className={`screen-card ${screen.className}`} key={screen.src}>
-                  <div className="screen-image-wrap"><img src={screen.src} alt={screen.alt} loading="lazy" /></div>
+                  <button className="screen-image-wrap screen-image-button" type="button" onClick={() => setSelectedScreen(screen)} aria-label={`Ingrandisci: ${screen.title}`}><img src={screen.src} alt={screen.alt} loading="lazy" /><span className="screen-zoom-hint">Clicca per ingrandire</span></button>
                   <div className="screen-caption"><h3>{screen.title}</h3><p>{screen.text}</p></div>
                 </article>
               ))}
             </div>
           </div>
         </section>
+
+        {selectedScreen && (
+          <div className="lightbox" role="dialog" aria-modal="true" aria-label={selectedScreen.title} onClick={() => setSelectedScreen(null)}>
+            <div className="lightbox-panel" onClick={(event) => event.stopPropagation()}>
+              <div className="lightbox-toolbar"><div><span className="lightbox-kicker">ExpenseTracker / schermata app</span><h3>{selectedScreen.title}</h3></div><button className="lightbox-close" type="button" onClick={() => setSelectedScreen(null)} aria-label="Chiudi immagine ingrandita">×</button></div>
+              <div className="lightbox-image-wrap"><img src={selectedScreen.src} alt={selectedScreen.alt} /></div>
+              <p className="lightbox-caption">{selectedScreen.text}</p>
+            </div>
+          </div>
+        )}
 
         <section className="roadmap-section">
           <div className="container roadmap-layout"><div className="roadmap-heading"><div className="eyebrow light"><span className="eyebrow-dot" /> Dove siamo</div><h2>Funzioni pensate<br /><em>per la vita reale.</em></h2><p>Dalla registrazione manuale agli strumenti avanzati: ogni funzione è costruita per ridurre attrito e aumentare consapevolezza.</p></div><div className="roadmap-list"><div className="roadmap-item active"><span className="roadmap-status">01</span><div><strong>Gestione</strong><p>Budget, categorie gerarchiche e tag</p></div><span className="roadmap-tag">completato</span></div><div className="roadmap-item"><span className="roadmap-status">02</span><div><strong>Automazione</strong><p>Ricorrenze, promemoria e intent Android</p></div><span className="roadmap-tag">in corso</span></div><div className="roadmap-item"><span className="roadmap-status">03</span><div><strong>Importazione</strong><p>CSV, TSV, OFX e divisione delle spese</p></div><span className="roadmap-tag">prossimo</span></div></div></div>
