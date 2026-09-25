@@ -21,37 +21,39 @@ const categories = [
   { label: "Mobilità", value: "€ 156", color: "#a9bad2", width: "33%" },
 ];
 
+const ASSET_BASE = `${import.meta.env.BASE_URL}assets/screens/`;
+
 const appScreens = [
   {
-    src: "/manus-storage/home-transactions_ddc33622.jpg",
+    src: `${ASSET_BASE}home-transactions.jpg`,
     alt: "Schermata Home di ExpenseTracker con elenco delle transazioni",
     title: "Tutto in un colpo d’occhio",
     text: "La home mostra saldo, entrate e uscite recenti senza nascondere i dettagli.",
     className: "screen-tall screen-featured",
   },
   {
-    src: "/manus-storage/budget-analytics_dfd70800.jpg",
+    src: `${ASSET_BASE}budget-analytics.jpg`,
     alt: "Schermata Analisi Budget di ExpenseTracker",
     title: "Budget vs spese effettive",
     text: "Un’analisi visuale per capire quanto hai pianificato e quanto hai davvero speso.",
     className: "screen-tall",
   },
   {
-    src: "/manus-storage/recurring-transactions_3643b681.jpg",
+    src: `${ASSET_BASE}recurring-transactions.jpg`,
     alt: "Schermata delle transazioni ricorrenti di ExpenseTracker",
     title: "Ricorrenze senza pensieri",
     text: "Gestisci scadenze, frequenze e promemoria direttamente dall’app.",
     className: "screen-tall",
   },
   {
-    src: "/manus-storage/transaction-detail_27e6e6b3.jpg",
+    src: `${ASSET_BASE}transaction-detail.jpg`,
     alt: "Dettaglio di una transazione in ExpenseTracker",
     title: "Dettagli quando servono",
     text: "Categorie, tag, note e date rendono ogni movimento facile da ritrovare.",
     className: "screen-tall",
   },
   {
-    src: "/manus-storage/import-data_bc5ec559.jpg",
+    src: `${ASSET_BASE}import-data.jpg`,
     alt: "Schermata Importa Transazioni di ExpenseTracker",
     title: "Importazione manuale",
     text: "Porta i tuoi dati dentro ExpenseTracker con un flusso chiaro e locale.",
