@@ -97,7 +97,7 @@ export default function Home() {
   const displayedCategories = categories.map((category) => ({ ...category, label: t(category.label, category.label === "Casa" ? "Home" : category.label === "Mobilità" ? "Mobility" : "Food & drink") }));
   const displayedPrinciples = principles.map((principle) => ({
     ...principle,
-    title: t(principle.title, principle.title === "Scansiona" ? "Scan" : principle.title === "Pianifica" ? "Plan" : "Importa"),
+    title: t(principle.title, principle.title === "Scansiona" ? "Scan" : principle.title === "Pianifica" ? "Plan" : "Import"),
     text: t(principle.text, principle.number === "01" ? "Photograph a receipt: on-device OCR recognizes amount, date, merchant and category." : principle.number === "02" ? "Set global or category budgets and compare planned versus actual spending visually." : "Bring in CSV, TSV or OFX files with preview, column mapping and deduplication."),
   }));
   const setLanguageAndRemember = (next: "it" | "en") => {
