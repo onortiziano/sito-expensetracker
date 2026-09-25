@@ -133,6 +133,7 @@ export default function Home() {
         <nav className="site-nav" aria-label="Navigazione principale">
           <a href="#home">Home</a>
           <a href="#dettagli">Il progetto</a>
+          <a href="#release">Release v55</a>
           <a href="#contatti">Contatti</a>
         </nav>
         <a className="header-link" href="#contatti">Parliamone <ArrowUpRight size={15} /></a>
@@ -248,6 +249,43 @@ export default function Home() {
 
         <section className="roadmap-section">
           <div className="container roadmap-layout"><div className="roadmap-heading"><div className="eyebrow light"><span className="eyebrow-dot" /> Dove siamo</div><h2>Funzioni pensate<br /><em>per la vita reale.</em></h2><p>Dalla registrazione manuale agli strumenti avanzati: ogni funzione è costruita per ridurre attrito e aumentare consapevolezza.</p></div><div className="roadmap-list"><div className="roadmap-item active"><span className="roadmap-status">01</span><div><strong>Gestione</strong><p>Budget, categorie gerarchiche e tag</p></div><span className="roadmap-tag">completato</span></div><div className="roadmap-item"><span className="roadmap-status">02</span><div><strong>Automazione</strong><p>Ricorrenze, promemoria e intent Android</p></div><span className="roadmap-tag">completato</span></div><div className="roadmap-item"><span className="roadmap-status">03</span><div><strong>Importazione</strong><p>CSV, TSV, OFX e divisione delle spese</p></div><span className="roadmap-tag">completato</span></div></div></div>
+        </section>
+
+        <section className="release-section" id="release">
+          <div className="container">
+            <div className="release-header">
+              <div>
+                <div className="eyebrow"><span className="eyebrow-dot navy" /> Release notes / v55</div>
+                <h2>Più controllo,<br /><em>meno attrito.</em></h2>
+              </div>
+              <div className="release-summary">
+                <div className="release-meta"><span>21 SET 2026</span><span>ANDROID</span><span>53,1 MB</span></div>
+                <p>La release v55 porta ExpenseTracker verso una gestione più completa delle spese condivise, importazioni più affidabili e un flusso locale ancora più solido.</p>
+                <a className="text-link release-link" href="https://github.com/onortiziano/expensetracker/releases/tag/v55" target="_blank" rel="noreferrer">Vedi la release su GitHub <ArrowUpRight size={15} /></a>
+              </div>
+            </div>
+            <div className="release-grid">
+              <article className="release-card release-card-featured">
+                <span className="release-index">01 / 03</span>
+                <h3>Spese condivise<br /><em>e crediti.</em></h3>
+                <p>Dividi una spesa tra più persone, registra automaticamente i debiti e gestisci il rientro con un saldo chiaro.</p>
+                <ul><li><Check size={14} /> Dialogo “Dividi spesa” con importi precompilati</li><li><Check size={14} /> Schermata Crediti con stato aperto o saldato</li><li><Check size={14} /> Operazioni atomiche per evitare doppie registrazioni</li></ul>
+              </article>
+              <article className="release-card">
+                <span className="release-index">02 / 03</span>
+                <h3>Importazione<br /><em>più robusta.</em></h3>
+                <p>Porta dentro dati reali da app di pagamento e conti senza doverli ripulire prima.</p>
+                <ul><li><Check size={14} /> Mapping manuale per CSV, TSV e TXT</li><li><Check size={14} /> Supporto CSV e OFX con anteprima</li><li><Check size={14} /> Date italiane, decimali e rilevamento dell’importo</li></ul>
+              </article>
+              <article className="release-card">
+                <span className="release-index">03 / 03</span>
+                <h3>Stabilità<br /><em>locale.</em></h3>
+                <p>Più affidabilità nei passaggi delicati, mantenendo dati e backup sotto il tuo controllo.</p>
+                <ul><li><Check size={14} /> Backup e ripristino locali più affidabili</li><li><Check size={14} /> Migrazione Room v6 per i crediti</li><li><Check size={14} /> Arrotondamenti coerenti e deduplicazione delle note</li></ul>
+              </article>
+            </div>
+            <div className="release-footer"><span><ShieldCheck size={15} /> Local-first · nessun account · nessun cloud</span><span>Build v55 · app-release.apk</span></div>
+          </div>
         </section>
 
         <section className="contact-section" id="contatti">
