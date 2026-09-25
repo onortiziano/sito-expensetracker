@@ -308,3 +308,13 @@ h2 { margin-top: 20px; color: #20334e; font-size: clamp(42px, 5vw, 68px); line-h
 .release-footer span:first-child { color: #52739b; }
 @media (max-width: 900px) { .release-header { grid-template-columns: 1fr; gap: 28px; } .release-grid { grid-template-columns: 1fr; } .release-card, .release-card:first-child { min-height: auto; padding: 28px 0; border-right: 0; border-bottom: 1px solid #d5dee7; } .release-card:last-child { border-bottom: 0; } .release-card h3 { margin-top: 24px; } }
 @media (max-width: 560px) { .release-section { padding: 90px 0; } .release-meta { gap: 11px; font-size: 8px; } .release-card h3 { font-size: 23px; } .release-footer { align-items: flex-start; flex-direction: column; gap: 12px; } }
+
+
+.header-tools { display: flex; align-items: center; gap: 22px; }
+.language-switcher { display: inline-flex; align-items: center; gap: 5px; color: rgba(216,225,236,.55); font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .08em; }
+.language-switcher button { padding: 4px 2px; border: 0; color: inherit; background: transparent; font: inherit; letter-spacing: inherit; cursor: pointer; transition: color 160ms ease, transform 160ms ease; }
+.language-switcher button:hover, .language-switcher button.language-active { color: #f5f7fb; }
+.language-switcher button:active { transform: scale(.92); }
+.language-switcher button:focus-visible { outline: 2px solid #9dbbd7; outline-offset: 3px; border-radius: 3px; }
+@media (max-width: 900px) { .header-tools { gap: 0; } }
+@media (max-width: 560px) { .language-switcher { font-size: 9px; } }
